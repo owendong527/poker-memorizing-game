@@ -1,0 +1,124 @@
+#cards {
+  /* outline: 3px solid green; */
+/* flexbox的核心概念是軸 預設軸是row 橫的*/
+  display: flex;
+  flex-wrap: wrap;  /*  U45:產生 52 張牌 追加的 */
+ 
+  width: 90%;/* U54：寬度和標頭一致 */
+  margin: 0 auto;/* U54：置中 */
+}
+
+.card {
+/* 卡片在容器內的排版 */
+    /* 100/13=7.多 ，而多的那部分可以有空間拿來做未來許多卡片在容器的排版*/
+  /* flex: 7% 0 1; 每個 item 分配容器寬度  上面第3行的說明所以，這裡的7%代表的就是寬度*/
+  flex: 7% 1 1; /* U54：卡片需要分配剩餘空間 */
+  height: 8vw;  /* vw是一個相對單位 100vw就是完整的視窗大小 所以8vw就是8%的視窗大小*/
+  border: 2px solid #e0e0e0;
+  /* flex-basis flex-grow flex-shrink */
+
+  margin: 2px; /*  U45:產生 52 張牌 追加的  卡片邊距 */
+  box-sizing: border-box; /*  U45:產生 52 張牌 追加的  設定 box-sizing  */
+
+/* 卡片內部元素的排版 */
+  display: flex;
+    /* main axis */
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.card img {
+  max-width: 30%;
+  align-self: center;
+}
+
+.card p {
+  margin: 3px;
+  font-size: 10px;
+}
+
+.card p:last-child {
+  transform: rotate(180deg);
+}
+
+.back {
+  background: url('https://assets-lighthouse.alphacamp.co/uploads/image/file/9222/ExportedContentImage_00.png');
+  /* 當少加了background-size 屬性時圖片超大但元素超小所以跑圖了，他會去調整圖片在這裡背景的大小 而完全進到.back元素裡面 */
+  background-size: cover;  
+  
+}
+
+.paired {
+  background-color: #dae0e3;
+}
+
+#header {
+  /* outline: 3px solid red; */
+  display: flex;
+  margin: 0em;
+  padding: 1em;
+  flex-direction: column;
+  /* 這裡的主要軸是直的column */
+  /* align-items是管次要軸 這裡是橫的row 所以flex-end會讓分數和次數跑到右邊 */
+  align-items: flex-end;
+  width: 90%;
+}
+
+#header .title {
+  outline: 3px solid yellow;
+  display: flex;
+  /* 這裡呈現的會是90%的100% */
+  width: 100%;
+  /* 這裡的主要軸是橫的row */
+  justify-content: flex-end;
+}
+
+#header .title img {
+  max-width: 3em;
+
+}
+
+#header .title h2 {
+  padding-left: 0.5em;
+}
+
+.wrong {
+  animation: wrongAnimation 0.2s;  
+  animation-iteration-count : 5;  
+  /* 一次會播0.2秒  會播5次 所以動畫總共是1秒 */
+}
+
+/* css3 動畫的功能 */
+/* 有點像是在學fresh時 關鍵影格的功能 */
+/* 會有個初始狀態和到結束狀態0%~100%的功能 */
+/* 0%{樣式Ａ} .. 30%{樣式Ｂ} ..100%{樣式Ｃ} */
+/* 這裡只要讓他做一次變化(讓他閃爍而已) 所以100% */
+/* 動畫定義好後 它像是個class 要套用在class身上 所以到上面的 .wrong */
+@keyframes wrongAnimation {
+  100% {
+    border: 2px solid #f1c232
+  }
+}
+
+/** Game finished **/
+.completed {
+  position: absolute;
+  z-index: 999;
+  top: 33vh;
+  background-color: RGBA(232, 246, 254, 0.8);
+  width: 100vw;
+  padding: 50px 0;
+}
+
+.completed>p {
+  font-size: 1.5em;
+  color: black;
+  text-align: center;
+  margin: 0;
+}
+
+.completed>p:first-child {
+  font-size: 3em;
+  font-weight: 700;
+  color: #758d9a;
+}
